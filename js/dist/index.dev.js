@@ -33,127 +33,56 @@ window.addEventListener('scroll', function () {
   } else {
     scrollIcon.style.display = 'none';
   }
-}); //tabs button active
-
-var sectionn = document.querySelectorAll(".tabs-items");
-sectionn.forEach(function (section) {
-  var tabBtns = section.querySelectorAll(".tabs button");
-  tabBtns.forEach(function (tabBtn) {
-    tabBtn.addEventListener("click", function () {
-      tabBtns.forEach(function (button) {
-        button.classList.remove("active");
-      });
-      this.classList.add("active");
-      var tabContents = section.closest(".items").querySelectorAll(".tab-content");
-      tabContents.forEach(function (content) {
-        content.style.display = "none";
-      });
-      var dataShow = this.getAttribute("data-show").toLowerCase();
-      var contentToShow = section.closest(".items").querySelector(".tab-content[data-content=\"".concat(dataShow, "\"]"));
-
-      if (contentToShow) {
-        contentToShow.style.display = "block";
-      }
-    });
-  });
-}); //add card button
-
-var addBtns = document.querySelectorAll(".itembtn");
-addBtns.forEach(function (addBtn) {
-  addBtn.addEventListener("click", function () {
-    var buttonText = addBtn.querySelector("a");
-    var cardElement = addBtn.closest('.cardProduct');
-    var cardData = {
-      id: cardElement.getAttribute('product-id'),
-      name: cardElement.getAttribute('product-type'),
-      price: cardElement.getAttribute('product-price'),
-      image: cardElement.getAttribute('product-image'),
-      count: 1
-    };
-    var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
-    var productExists = savedProducts.find(function (product) {
-      return product.id === cardData.id;
-    });
-
-    if (productExists) {
-      savedProducts = savedProducts.filter(function (product) {
-        return product.id !== cardData.id;
-      });
-      buttonText.innerText = "Add Card";
-      addBtn.style.backgroundColor = "#0099cc";
-    } else {
-      savedProducts.push(cardData);
-      buttonText.innerText = "Remove Card";
-      addBtn.style.backgroundColor = "red";
-    }
-
-    localStorage.setItem('cardProducts', JSON.stringify(savedProducts));
-    updateCardCount();
-  });
-});
-
-function updateCardCount() {
-  var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
-  var countElement = document.querySelector('#card-count');
-
-  if (countElement) {
-    countElement.textContent = savedProducts.length;
-  }
-}
-
-function initializeButtonStates() {
-  var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
-  var allCards = document.querySelectorAll('.cardProduct');
-  allCards.forEach(function (card) {
-    var cardId = card.getAttribute('product-id');
-    var addBtn = card.querySelector(".itembtn a");
-    var productExists = savedProducts.find(function (product) {
-      return product.id === cardId;
-    });
-
-    if (productExists) {
-      addBtn.innerText = "Remove Card";
-      addBtn.closest('.itembtn').style.backgroundColor = "red";
-    } else {
-      addBtn.innerText = "Add Card";
-      addBtn.closest('.itembtn').style.backgroundColor = "#0099cc";
-    }
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  updateCardCount();
-  initializeButtonStates();
 }); // Toggle Heart Function
 
 function toggleHeart(element) {
   var productElement = element.closest('.product');
+
+  if (!productElement) {
+    console.error("Product element not found!");
+    return;
+  }
+
   var heartIcon = productElement.querySelector('.heart i');
+
+  if (!heartIcon) {
+    console.error("Heart icon not found!");
+    return;
+  }
+
   heartIcon.classList.toggle('fa-heart');
   heartIcon.classList.toggle('fa-heart-broken');
   var productData = {
     id: productElement.getAttribute('data-id'),
     name: productElement.getAttribute('data-name'),
-    description: productElement.getAttribute('data-description'),
-    price: productElement.getAttribute('data-price'),
+    price: parseFloat(productElement.getAttribute('data-price')) || 0,
     image: productElement.getAttribute('data-image'),
     count: 1
   };
   var savedProducts = JSON.parse(localStorage.getItem('favoriteProducts')) || [];
-  var productExists = savedProducts.find(function (product) {
+  var productIndex = savedProducts.findIndex(function (product) {
     return product.id === productData.id;
   });
 
-  if (productExists) {
-    savedProducts = savedProducts.filter(function (product) {
-      return product.id !== productData.id;
-    });
+  if (productIndex !== -1) {
+    savedProducts.splice(productIndex, 1);
+    toastr.success("Removed from wishlist");
   } else {
     savedProducts.push(productData);
+    toastr.success("Added to wishlist");
   }
 
   localStorage.setItem('favoriteProducts', JSON.stringify(savedProducts));
   updateFavoriteCount();
+}
+
+function updateFavoriteCount() {
+  var savedProducts = JSON.parse(localStorage.getItem('favoriteProducts')) || [];
+  var countElement = document.querySelector('#favorite-count');
+
+  if (countElement) {
+    countElement.textContent = savedProducts.length;
+  }
 }
 
 function initializeHearts() {
@@ -170,19 +99,268 @@ function initializeHearts() {
       heartIcon.classList.add('fa-heart-broken');
     }
   });
-} //update wishing list count
+}
 
+document.addEventListener('DOMContentLoaded', function () {
+  initializeHearts();
+  updateFavoriteCount();
+}); //get data to products
 
-function updateFavoriteCount() {
-  var savedProducts = JSON.parse(localStorage.getItem('favoriteProducts')) || [];
-  var countElement = document.querySelector('#favorite-count');
+var Products = [];
+document.querySelectorAll(".tab-btn").forEach(function (button) {
+  button.addEventListener("click", function () {
+    document.querySelectorAll(".tab-btn").forEach(function (btn) {
+      return btn.classList.remove("active");
+    });
+    this.classList.add("active");
+    var filter = this.getAttribute("data-filter");
+    console.log("Filter selected:", filter);
+    disProducts(filter, ".featured-products");
+  });
+});
+document.querySelectorAll("[data-show]").forEach(function (button) {
+  button.addEventListener("click", function () {
+    document.querySelectorAll("[data-show]").forEach(function (btn) {
+      return btn.classList.remove("active");
+    });
+    this.classList.add("active");
+    var filter = this.getAttribute("data-show");
+    console.log("Filter selected:", filter);
+    disProducts(filter, ".featured-section");
+  });
+});
+
+function getAllProducts() {
+  var res, result;
+  return regeneratorRuntime.async(function getAllProducts$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(fetch("https://ecommerce.routemisr.com/api/v1/products"));
+
+        case 3:
+          res = _context.sent;
+          _context.next = 6;
+          return regeneratorRuntime.awrap(res.json());
+
+        case 6:
+          result = _context.sent;
+          Products = result.data;
+          console.log("All Products:", Products);
+          disProducts("true", ".featured-products");
+          disProducts("featured", ".featured-section");
+          _context.next = 17;
+          break;
+
+        case 13:
+          _context.prev = 13;
+          _context.t0 = _context["catch"](0);
+          console.error("Error fetching products:", _context.t0);
+          document.querySelector(".items").innerHTML = "<p>Error loading products. Please try again later.</p>";
+
+        case 17:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
+}
+
+function disProducts(filter, targetClass) {
+  var products = "";
+  var filteredProducts = [];
+
+  function filterProducts(filter) {
+    var filteredProducts = [];
+
+    if (filter === "true") {
+      filteredProducts = Products.slice(0, 8);
+    } else if (filter === "false") {
+      filteredProducts = Products.filter(function (product) {
+        return product.price < 200;
+      });
+      filteredProducts = filteredProducts.slice(0, 8);
+    } else if (filter === "falsee") {
+      filteredProducts = Products.filter(function (product) {
+        return product.ratingsAverage >= 4.9;
+      });
+      filteredProducts = filteredProducts.slice(0, 8);
+    }
+
+    if (filter === "featured") {
+      filteredProducts = Products.slice(8, 16);
+    } else if (filter === "sale") {
+      filteredProducts = Products.slice(2, 10);
+    } else if (filter === "rated") {
+      filteredProducts = Products.slice(19, 27);
+    }
+
+    return filteredProducts;
+  }
+
+  filteredProducts = filterProducts(filter);
+
+  if (filteredProducts.length === 0) {
+    products = "<p>No products found for this filter.</p>";
+  } else {
+    products = '';
+    filteredProducts.forEach(function (product) {
+      var newClass = product.sold < 2000 ? 'new' : '';
+      var saleClass = product.price < 200 ? 'sale' : '';
+      products += "\n            <div class=\"item product col-lg-3 col-md-4 col-sm-6 cardProduct ".concat(newClass, " ").concat(saleClass, "\" \n            data-id=\"").concat(product.id, "\" \n            data-type=\"").concat(product.title.split(" ", 2).join(" "), "\" \n            data-price=\"").concat(product.price, "\" \n            data-image=\"").concat(product.imageCover, "\"\n            data-name=\"").concat(product.title, "\">\n                <div class=\"item-img ").concat(newClass, " ").concat(saleClass, "\">\n                    <img src=\"").concat(product.imageCover, "\" alt=\"").concat(product.title, "\">\n                    <div class=\"heart\" onclick=\"toggleHeart(this)\">\n                        <i class=\"fa-solid fa-heart\"></i>\n                    </div>\n                </div>\n                <div class=\"item-info\">\n                    <h6>$").concat(product.price, "</h6>\n                    <span>").concat(product.category.name, "</span>\n                    <p class=\"title\">").concat(product.title.split(" ", 2).join(" "), "</p>\n                </div>\n                <div class=\"itembtn\">\n                    <a>Add to Cart</a>\n                </div> \n            </div>");
+    });
+    initializeCartButtons();
+    initializeHearts();
+  }
+
+  document.querySelector(targetClass).innerHTML = products;
+  initializeCartButtons();
+  initializeHearts();
+}
+
+getAllProducts(); //add card button
+
+function toggleCart(element) {
+  var productElement = element.closest('.cardProduct');
+
+  if (!productElement) {
+    console.error("Product element not found!");
+    return;
+  }
+
+  var addBtn = productElement.querySelector(".itembtn a");
+  var productId = productElement.getAttribute('data-id');
+  var productName = productElement.getAttribute('data-name');
+  var productPrice = parseFloat(productElement.getAttribute('data-price')) || 0;
+  var productImage = productElement.getAttribute('data-image');
+  var productData = {
+    id: productId,
+    name: productName,
+    price: productPrice,
+    image: productImage,
+    count: 1
+  };
+  var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
+  var productIndex = savedProducts.findIndex(function (product) {
+    return product.id === productData.id;
+  });
+
+  if (productIndex !== -1) {
+    savedProducts.splice(productIndex, 1);
+    addBtn.innerText = "Add Card";
+    addBtn.closest('.itembtn').style.backgroundColor = "#0099cc";
+    toastr.success('Product removed from the cart!');
+  } else {
+    savedProducts.push(productData);
+    addBtn.innerText = "Remove Card";
+    addBtn.closest('.itembtn').style.backgroundColor = "red";
+    toastr.success('Product added to the cart!');
+  }
+
+  localStorage.setItem('cardProducts', JSON.stringify(savedProducts));
+  updateCartCount();
+}
+
+function updateCartCount() {
+  var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
+  var countElement = document.querySelector('#card-count');
 
   if (countElement) {
     countElement.textContent = savedProducts.length;
   }
 }
 
+function initializeCartButtons() {
+  var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
+  var allCards = document.querySelectorAll('.cardProduct');
+  allCards.forEach(function (card) {
+    var cardId = card.getAttribute('data-id');
+    var addBtn = card.querySelector(".itembtn a");
+    var productExists = savedProducts.some(function (product) {
+      return product.id === cardId;
+    });
+
+    if (productExists) {
+      addBtn.innerText = "Remove Card";
+      addBtn.closest('.itembtn').style.backgroundColor = "red";
+    } else {
+      addBtn.innerText = "Add Card";
+      addBtn.closest('.itembtn').style.backgroundColor = "#0099cc";
+    }
+
+    addBtn.removeEventListener("click", handleCartButtonClick);
+    addBtn.addEventListener("click", handleCartButtonClick);
+  });
+}
+
+function handleCartButtonClick(event) {
+  var addBtn = event.currentTarget;
+  toggleCart(addBtn);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  initializeHearts();
-  updateFavoriteCount();
-});
+  updateCartCount();
+  initializeCartButtons();
+}); //get data for trends
+
+function fetchProducts() {
+  var response, data;
+  return regeneratorRuntime.async(function fetchProducts$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return regeneratorRuntime.awrap(fetch('https://ecommerce.routemisr.com/api/v1/products'));
+
+        case 2:
+          response = _context2.sent;
+          _context2.next = 5;
+          return regeneratorRuntime.awrap(response.json());
+
+        case 5:
+          data = _context2.sent;
+          console.log(data);
+
+          if (data && data.data) {
+            displayProducts(data.data);
+          } else {
+            console.error('No products found or error fetching data');
+          }
+
+        case 8:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+}
+
+function displayProducts(products) {
+  var carouselInner = document.getElementById('carouselProducts');
+  var carouselItems = '';
+  var itemsPerCarousel = 3;
+  var currentIndex = 0;
+
+  while (currentIndex < products.length) {
+    var carouselItemContent = "<div class=\"carousel-item ".concat(currentIndex === 0 ? 'active' : '', "\">");
+    carouselItemContent += '<div class="row">';
+
+    for (var i = 0; i < itemsPerCarousel; i++) {
+      if (currentIndex < products.length) {
+        var product = products[currentIndex];
+        carouselItemContent += "\n                    <div class=\"col-12 col-md-6 col-lg-4\">\n                        <div class=\"product\" data-id=\"".concat(product._id, "\" data-name=\"").concat(product.title, "\" \n                            data-description=\"").concat(product.description, "\" data-price=\"").concat(product.price, "\" \n                            data-image=\"").concat(product.imageCover, "\">\n                            <div class=\"product-img\">\n                                <img src=\"").concat(product.imageCover, "\" alt=\"").concat(product.title, "\">\n                            </div>\n                            <div class=\"product-info\">\n                                <span>").concat(product.title.split(" ", 2).join(" "), "</span>\n                                <div class=\"text\">\n                                    <p>").concat(product.description.split(" ", 1).join(" "), "</p>\n                                    <p>$").concat(product.price, "</p>\n                                </div>\n                            </div>\n                            <div class=\"heart\" onclick=\"toggleHeart(this)\">\n                                <i class=\"fa-solid fa-heart\" id=\"heart-icon\"></i>\n                            </div>\n                        </div>\n                    </div>\n                ");
+        currentIndex++;
+      }
+    }
+
+    carouselItemContent += '</div>';
+    carouselItemContent += '</div>';
+    carouselItems += carouselItemContent;
+  }
+
+  carouselInner.innerHTML = carouselItems;
+}
+
+document.addEventListener('DOMContentLoaded', fetchProducts);

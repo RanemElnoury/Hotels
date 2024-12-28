@@ -89,9 +89,9 @@ header {
                         border-radius: 50%;
                         color: $seconderyTextColor;
                         display: flex;
-                        justify-content: center; /* لجعل الرقم في المنتصف أفقيًا */
-                        align-items: center; /* لجعل الرقم في المنتصف رأسيًا */
-                        font-size: 12px; /* التحكم بحجم الرقم */
+                        justify-content: center; 
+                        align-items: center;
+                        font-size: 12px; 
                     }
                 }
                 .page-info {
@@ -306,8 +306,6 @@ header {
         }
     }
     .right-item {
-        // background-color: #ffc107; // Uncomment if you want background color
-
         .tabs {
             display: flex;
             justify-content: flex-start;
@@ -318,6 +316,7 @@ header {
             padding: 15px 0;
             @include tab-content;
         }
+     
     }
 }
 //end deals
@@ -447,7 +446,7 @@ header {
             span {
                 margin-top: -10px !important;
                 font-size: 0.9rem;
-                line-height: 0.5; // تعديل line-height هنا لتحقيق تناسق أفضل
+                line-height: 0.5;
                 color: #64686b;
             }
         }
@@ -531,36 +530,13 @@ header {
                     align-items: center;
                     p {
                         line-height: 0.5;
-                        font-size: 1rem;
+                        font-size: .9rem;
                         font-weight: 500;
                     }
                 }
             }
             .heart {
-                position: absolute;
-                top: 23px;
-                right: 10px;
-                background-color: #d8d9daaf;
-                padding: 5px;
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: 1px solid #b6b8ba;
-                cursor: pointer;
-                visibility: hidden;
-                .fa-heart {
-                    color: #b6b8ba;
-                }
-                &:hover {
-                    background-color: #eee;
-                    box-shadow:
-                        0 4px 6px rgba(0, 0, 0, 0.2),
-                        0 1px 3px rgba(0, 0, 0, 0.1);
-                    i {
-                        color: red;
-                    }
-                }
+               @include heart;
             }
             &:hover {
                 .heart {

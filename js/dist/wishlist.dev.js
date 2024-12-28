@@ -8,13 +8,11 @@ function renderWishlist() {
 
   if (favoriteProducts.length === 0) {
     wishlistContainer.innerHTML = getEmptyWishlistHTML();
-    clearBtn.disabled = true; // Disable the "Clear All" button when the wishlist is empty
-
+    clearBtn.disabled = true;
     return;
   }
 
-  clearBtn.disabled = false; // Enable the "Clear All" button if there are products in the wishlist
-
+  clearBtn.disabled = false;
   wishlistContainer.innerHTML = favoriteProducts.map(function (product) {
     return getProductHTML(product);
   }).join('');
@@ -70,22 +68,26 @@ function addToCart(productId) {
   });
 
   if (!productToAdd) {
-    alert("This product is not in your wishlist.");
+    toastr.success("This product is not in your wishlist.");
     return;
   }
 
   var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
-
-  if (savedProducts.find(function (product) {
+  var existingProduct = savedProducts.find(function (product) {
     return product.id === productToAdd.id;
-  })) {
-    alert("".concat(productToAdd.name, " is already in your cart."));
+  });
+
+  if (existingProduct) {
+    existingProduct.count = (existingProduct.count || 1) + 1;
+    toastr.success("".concat(productToAdd.name, " count has been updated in your cart."));
   } else {
+    productToAdd.count = 1;
     savedProducts.push(productToAdd);
-    localStorage.setItem('cardProducts', JSON.stringify(savedProducts));
-    alert("".concat(productToAdd.name, " has been added to your cart!"));
-    updateCartCount();
+    toastr.success("".concat(productToAdd.name, " has been added to your cart!"));
   }
+
+  localStorage.setItem('cardProducts', JSON.stringify(savedProducts));
+  updateCartCount();
 }
 
 function updateCartCount() {

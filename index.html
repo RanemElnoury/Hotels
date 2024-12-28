@@ -13,8 +13,8 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sometype+Mono:ital,wght@0,400..700;1,400..700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <title>E-Commerce</title>
 </head>
 
 <body>
@@ -61,7 +61,7 @@
                         </a>
                         <div class="page-info">
                             <h6>Cart</h6>
-                            <span >0 $</span>
+                            <span>0 $</span>
                         </div>
                     </div>
                 </div>
@@ -102,14 +102,18 @@
                             <li class="nav-item"><a href="#deals">Super Deals</a></li>
                             <li class="nav-item"><a href="#arrival">New Arrival</a></li>
                             <li class="nav-item"><a href="#trends">Trends</a></li>
-                            <li data-bs-toggle="dropdown" aria-expanded="true"><a href="#">Pages <i
-                                        class="fa-solid fa-caret-down"></i></a>
-                                <ul class="dropdown-menu">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link " href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pages <i class="fa-solid fa-caret-down"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="cart.html">Cart</a></li>
                                     <li><a class="dropdown-item" href="wishing.html">WishList</a></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
                             </li>
+
                             <li class="nav-item"><a href="#">Blog</a></li>
                             <li class="nav-item"><a href="#contact">Contact</a></li>
                         </ul>
@@ -305,217 +309,21 @@
                 <div class="right-item col-lg-8 col-md-6 my-2">
                     <div class="tabs-items">
                         <div class="tabs border-1 border-bottom">
-                            <button class="active" data-show="true">Featured</button>
-                            <button data-show="false">On Sale</button>
-                            <button data-show="falsee">Best Rated</button>
+                            <button class="tab-btn active" data-filter="true">Featured</button>
+                            <button class="tab-btn" data-filter="false">On Sale</button>
+                            <button class="tab-btn" data-filter="falsee">Best Rated</button>
+
                         </div>
                     </div>
-                    <div class="tab-content" data-content="true">
-                        <div class="row items">
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="1" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="2" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="3" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="4" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="5" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="6" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="7" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="8" product-price="357" product-type="IPad"
-                                    product-image="images/music.jpg">
-                                    <div class="new item-img">
-                                        <img src="images/music.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a>Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-content" data-content="false" style="display: none;">
-                        <div class="row items">
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="9" product-price="357" product-type="IPad"
-                                    product-image="images/watch.jpg">
-                                    <div class="item-img">
-                                        <img src="images/watch.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Iphone</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a href="#">Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="10" product-price="357" product-type="IPad"
-                                    product-image="images/phone.jpg">
-                                    <div class="new item-img">
-                                        <img src="images/phone.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a href="#">Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-content" data-content="falsee" style="display: none;">
-                        <div class="row items">
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="11" product-price="357" product-type="IPad"
-                                    product-image="images/mobile1.jpg">
-                                    <div class="item-img">
-                                        <img src="images/mobile1.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Toshiba</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a href="#">Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-3 col-md-4 col-sm-6">
-                                <div class="cardProduct" product-id="12" product-price="357" product-type="IPad"
-                                    product-image="images/mobile2.jpg">
-                                    <div class="new item-img">
-                                        <img src="images/mobile2.jpg" alt="">
-                                    </div>
-                                    <div class="item-info">
-                                        <h6>$357</h6>
-                                        <span>IPad</span>
-                                        <p class="title">Huawei Media Pad</p>
-                                    </div>
-                                    <div class="itembtn">
-                                        <a href="#">Add Card</a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="tab-content">
+                        <div class="row items featured-products ">
+
                         </div>
                     </div>
                 </div>
+
             </div>
+        </div>
         </div>
     </section>
     <!-- end deals section -->
@@ -650,235 +458,41 @@
                             <div class="left-item  ">
                                 <h3>Hot New Arrival</h3>
                             </div>
-                            <div class=" right-item">
-                                <button data-show="featured" class="active">Featured</button>
-                                <button data-show="sale">Audio & Video</button>
-                                <button data-show="rated">Labtops & Computers</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="tab-content" data-content="featured">
-                                <div class="row items">
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="13" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="14" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="15" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="16" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="17" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="18" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="19" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="20" product-price="357" product-type="IPad"
-                                            product-image="images/music.jpg">
-                                            <div class="new item-img">
-                                                <img src="images/music.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a>Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-content" data-content="sale" style="display: none;">
-                                <div class="row items">
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="21" product-price="357" product-type="IPad"
-                                            product-image="images/watch.jpg">
-                                            <div class="item-img">
-                                                <img src="images/watch.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Iphone</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a href="#">Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="22" product-price="357" product-type="IPad"
-                                            product-image="images/phone.jpg">
-                                            <div class="new item-img">
-                                                <img src="images/phone.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a href="#">Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-content" data-content="rated" style="display: none;">
-                                <div class="row items">
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="23" product-price="357" product-type="IPad"
-                                            product-image="images/mobile1.jpg">
-                                            <div class="item-img">
-                                                <img src="images/mobile1.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Toshiba</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a href="#">Add Card</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item col-lg-3 col-md-4 col-sm-6">
-                                        <div class="cardProduct" product-id="24" product-price="357" product-type="IPad"
-                                            product-image="images/mobile2.jpg">
-                                            <div class="new item-img">
-                                                <img src="images/mobile2.jpg" alt="">
-                                            </div>
-                                            <div class="item-info">
-                                                <h6>$357</h6>
-                                                <span>IPad</span>
-                                                <p class="title">Huawei Media Pad</p>
-                                            </div>
-                                            <div class="itembtn">
-                                                <a href="#">Add Card</a>
-                                            </div>
-                                        </div>
+                            <div class="right-item col-lg-8 col-md-6 ">
+                                <div class="tabs-items">
+                                    <div class="tabs border-1 border-bottom">
+                                        <button data-show="featured" class="active">Featured</button>
+                                        <button data-show="sale">Women's Fashion</button>
+                                        <button data-show="rated">Men's Fashion</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="last-item col-lg-3 ">
-                            <div class="item-img">
-                                <img src="images/two-phones.jpg" alt="">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="tab-content">
+                                    <div class="row items featured-section">
+
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="item-info">
-                                <h6>$357</h6>
-                                <span>IPad</span>
-                                <p class="title">Huawei Media Pad</p>
-                            </div>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
+                            <div class="last-item col-lg-3 ">
+                                <div class="item-img">
+                                    <img src="images/two-phones.jpg" alt="">
+                                </div>
+                                <div class="item-info">
+                                    <h6>$357</h6>
+                                    <span>IPad</span>
+                                    <p class="title">Huawei Media Pad</p>
+                                </div>
+                                <div class="stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -894,142 +508,22 @@
             <h2>Trends in 2021</h2>
             <hr>
             <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner products">
-                    <!-- Carousel Item 1 -->
+                <div class="carousel-inner products" id="carouselProducts">
                     <div class="carousel-item active">
-                        <div class="row">
-                            <!-- Product 1 -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="product" data-id="25" data-name="smartPhone" data-description="Lorem ipsum"
-                                    data-price="984" data-image="images/mouse1.jpg">
-                                    <div class="product-img">
-                                        <img src="images/mouse1.jpg" alt="mouse1">
-                                    </div>
-                                    <div class="product-info">
-                                        <span>smartPhone</span>
-                                        <div class="text">
-                                            <p>Lorem ipsum</p>
-                                            <p>$984</p>
-                                        </div>
-                                    </div>
-                                    <div class="heart" onclick="toggleHeart(this)">
-                                        <i class="fa-solid fa-heart" id="heart-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 2 -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="product" data-id="26" data-name="watch" data-description="Lorem ipsum"
-                                    data-price="150" data-image="images/watch.jpg">
-                                    <div class="product-img">
-                                        <img src="images/watch.jpg" alt="watch">
-                                    </div>
-                                    <div class="product-info">
-                                        <span>Watch</span>
-                                        <div class="text">
-                                            <p>Lorem ipsum</p>
-                                            <p>$150</p>
-                                        </div>
-                                    </div>
-                                    <div class="heart" onclick="toggleHeart(this)">
-                                        <i class="fa-solid fa-heart" id="heart-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 3 -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="product" data-id="27" data-name="torch" data-description="Bright torch"
-                                    data-price="50" data-image="images/troch.jpg">
-                                    <div class="product-img">
-                                        <img src="images/troch.jpg" alt="torch">
-                                    </div>
-                                    <div class="product-info">
-                                        <span>Torch</span>
-                                        <div class="text">
-                                            <p>Bright torch</p>
-                                            <p>$50</p>
-                                        </div>
-                                    </div>
-                                    <div class="heart" onclick="toggleHeart(this)">
-                                        <i class="fa-solid fa-heart" id="heart-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <!-- Carousel Item 2 -->
                     <div class="carousel-item ">
-                        <div class="row">
-                            <!-- Product 1 -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="product" data-id="28" data-name="smartPhone" data-description="Lorem ipsum"
-                                    data-price="984" data-image="images/mouse1.jpg">
-                                    <div class="product-img">
-                                        <img src="images/mouse1.jpg" alt="mouse1">
-                                    </div>
-                                    <div class="product-info">
-                                        <span>smartPhone</span>
-                                        <div class="text">
-                                            <p>Lorem ipsum</p>
-                                            <p>$984</p>
-                                        </div>
-                                    </div>
-                                    <div class="heart" onclick="toggleHeart(this)">
-                                        <i class="fa-solid fa-heart" id="heart-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 2 -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="product" data-id="29" data-name="watch" data-description="Lorem ipsum"
-                                    data-price="150" data-image="images/watch.jpg">
-                                    <div class="product-img">
-                                        <img src="images/watch.jpg" alt="watch">
-                                    </div>
-                                    <div class="product-info">
-                                        <span>Watch</span>
-                                        <div class="text">
-                                            <p>Lorem ipsum</p>
-                                            <p>$150</p>
-                                        </div>
-                                    </div>
-                                    <div class="heart" onclick="toggleHeart(this)">
-                                        <i class="fa-solid fa-heart" id="heart-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product 3 -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="product" data-id="30" data-name="torch" data-description="Bright torch"
-                                    data-price="50" data-image="images/troch.jpg">
-                                    <div class="product-img">
-                                        <img src="images/troch.jpg" alt="torch">
-                                    </div>
-                                    <div class="product-info">
-                                        <span>Torch</span>
-                                        <div class="text">
-                                            <p>Bright torch</p>
-                                            <p>$50</p>
-                                        </div>
-                                    </div>
-                                    <div class="heart" onclick="toggleHeart(this)">
-                                        <i class="fa-solid fa-heart" id="heart-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Controls -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                     data-bs-slide="prev">
-                    <span class="arrow " aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
+                    <span class="arrow" aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
                     data-bs-slide="next">
-                    <span class="arrow " aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
+                    <span class="arrow" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
@@ -1225,16 +719,11 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- ثم إضافة Bootstrap.bundle.min.js (يحتوي على جميع التبعيات بما في ذلك Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-
-
-
-    <!-- أخيرًا إضافة سكربتك الشخصي -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="js/index.js"></script>
+    
 </body>
 
 </html>

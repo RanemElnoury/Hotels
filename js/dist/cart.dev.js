@@ -8,25 +8,21 @@ function getEmptyWishlistHTML() {
 }
 
 function getProductHTML(product) {
-  var totalPrice = (product.price * product.count).toFixed(2); // حساب السعر الإجمالي باستخدام الكمية
-
+  var totalPrice = (product.price * product.count).toFixed(2);
   return "\n        <li class=\"row justify-content-between align-items-center border-bottom py-3\">\n            <div class=\"col-4\">\n                <img src=\"".concat(product.image, "\" alt=\"").concat(product.name, "\" class=\"img-fluid rounded me-2\" style=\"width: 50px;\">\n                <span>").concat(product.name, "</span>\n            </div>\n            <div class=\"col-3 text-secondary\">$").concat(product.price, "</div>\n            <div class=\"col-2\">\n                <button class=\"btn btn-sm\" onclick=\"updateQuantity('").concat(product.id, "', -1)\">-</button>\n                <span>").concat(product.count, "</span>\n                <button class=\"btn btn-sm\" onclick=\"updateQuantity('").concat(product.id, "', 1)\">+</button>\n            </div>\n             <div class=\"col-1\">\n                <button class=\"btn btn-danger btn-sm remove-btn\" data-id=\"").concat(product.id, "\"><i class=\"fa-solid fa-trash\"></i></button>\n            </div>\n            <div class=\"col-2 text-secondary\">$").concat(totalPrice, "</div>\n           \n        </li>\n    ");
 }
 
 function renderWishlist() {
-  var favoriteProducts = JSON.parse(localStorage.getItem('cardProducts')) || []; // طباعة البيانات في وحدة التحكم لمراقبتها
-
+  var favoriteProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
   console.log(favoriteProducts);
 
   if (favoriteProducts.length === 0) {
     wishlistContainer.innerHTML = getEmptyWishlistHTML();
-    payNow.disabled = true; // تعطيل زر "Pay Now" إذا كانت السلة فارغة
-
+    payNow.disabled = true;
     return;
   }
 
-  payNow.disabled = false; // تمكين زر "Pay Now" إذا كانت السلة تحتوي على منتجات
-
+  payNow.disabled = false;
   wishlistContainer.innerHTML = favoriteProducts.map(function (product) {
     return getProductHTML(product);
   }).join('');
@@ -41,8 +37,7 @@ function updateQuantity(productId, change) {
   });
   if (!productToUpdate) return;
   productToUpdate.count += change;
-  if (productToUpdate.count <= 0) productToUpdate.count = 1; // الحفاظ على الكمية على الأقل 1
-
+  if (productToUpdate.count <= 0) productToUpdate.count = 1;
   localStorage.setItem('cardProducts', JSON.stringify(savedProducts));
   renderWishlist();
   updateCartCount();
@@ -58,8 +53,7 @@ function attachRemoveListeners() {
   });
 }
 
-function attachAddToCartListeners() {// هنا يمكن إضافة وظائف إذا أردت تنفيذ إضافة العناصر إلى السلة
-}
+function attachAddToCartListeners() {}
 
 function removeFromWishlist(productId) {
   var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
@@ -82,23 +76,18 @@ function updateCartCount() {
 
 payNow.addEventListener('click', function () {
   var savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
-  var totalPrice = 0; // حساب إجمالي السعر
-
+  var totalPrice = 0;
   savedProducts.forEach(function (product) {
-    totalPrice += product.price * product.count; // ضرب السعر في الكمية
+    totalPrice += product.price * product.count;
   });
   var confirmPay = confirm("Are you sure you want to pay? Total price: $".concat(totalPrice.toFixed(2)));
 
   if (confirmPay) {
-    // تفريغ السلة
     localStorage.removeItem('cardProducts');
-    renderWishlist(); // إعادة رسم السلة بعد التفريغ
-
-    updateCartCount(); // تحديث عداد السلة
-    // إظهار صورة جديدة بعد التفريغ
-
+    renderWishlist();
+    updateCartCount();
     wishlistContainer.innerHTML = "\n            <div class=\"text-center\">\n                <img src=\"images/Shopping-Cart.png\" class=\"heartimage\" alt=\"clearWishing\" style=\"width:30%\">\n            </div>\n        ";
-    payNow.disabled = true; // تعطيل الزر بعد التفريغ
+    payNow.disabled = true;
   }
 });
 document.addEventListener('DOMContentLoaded', function () {

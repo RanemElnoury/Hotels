@@ -11,7 +11,7 @@ function getEmptyWishlistHTML() {
 }
 
 function getProductHTML(product) {
-    const totalPrice = (product.price * product.count).toFixed(2); // حساب السعر الإجمالي باستخدام الكمية
+    const totalPrice = (product.price * product.count).toFixed(2); 
     return `
         <li class="row justify-content-between align-items-center border-bottom py-3">
             <div class="col-4">
@@ -37,17 +37,15 @@ function getProductHTML(product) {
 
 function renderWishlist() {
     const favoriteProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
-
-    // طباعة البيانات في وحدة التحكم لمراقبتها
     console.log(favoriteProducts);
 
     if (favoriteProducts.length === 0) {
         wishlistContainer.innerHTML = getEmptyWishlistHTML();
-        payNow.disabled = true; // تعطيل زر "Pay Now" إذا كانت السلة فارغة
+        payNow.disabled = true; 
         return;
     }
 
-    payNow.disabled = false; // تمكين زر "Pay Now" إذا كانت السلة تحتوي على منتجات
+    payNow.disabled = false; 
     wishlistContainer.innerHTML = favoriteProducts.map(product => getProductHTML(product)).join('');
 
     attachRemoveListeners();
@@ -61,7 +59,7 @@ function updateQuantity(productId, change) {
     if (!productToUpdate) return;
 
     productToUpdate.count += change;
-    if (productToUpdate.count <= 0) productToUpdate.count = 1; // الحفاظ على الكمية على الأقل 1
+    if (productToUpdate.count <= 0) productToUpdate.count = 1; 
 
     localStorage.setItem('cardProducts', JSON.stringify(savedProducts));
     renderWishlist();
@@ -80,7 +78,6 @@ function attachRemoveListeners() {
 }
 
 function attachAddToCartListeners() {
-    // هنا يمكن إضافة وظائف إذا أردت تنفيذ إضافة العناصر إلى السلة
 }
 
 function removeFromWishlist(productId) {
@@ -103,26 +100,23 @@ payNow.addEventListener('click', function() {
     const savedProducts = JSON.parse(localStorage.getItem('cardProducts')) || [];
     let totalPrice = 0;
 
-    // حساب إجمالي السعر
     savedProducts.forEach(product => {
-        totalPrice += product.price * product.count; // ضرب السعر في الكمية
+        totalPrice += product.price * product.count; 
     });
 
     const confirmPay = confirm(`Are you sure you want to pay? Total price: $${totalPrice.toFixed(2)}`);
 
     if (confirmPay) {
-        // تفريغ السلة
         localStorage.removeItem('cardProducts');
-        renderWishlist(); // إعادة رسم السلة بعد التفريغ
-        updateCartCount(); // تحديث عداد السلة
+        renderWishlist(); 
+        updateCartCount(); 
 
-        // إظهار صورة جديدة بعد التفريغ
         wishlistContainer.innerHTML = `
             <div class="text-center">
                 <img src="images/Shopping-Cart.png" class="heartimage" alt="clearWishing" style="width:30%">
             </div>
         `;
-        payNow.disabled = true; // تعطيل الزر بعد التفريغ
+        payNow.disabled = true; 
     }
 });
 

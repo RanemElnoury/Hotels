@@ -72,7 +72,7 @@
             gap: 0 15px;
             margin-left: auto; 
             .nav-item.active a {
-                color:  $seconderyColor; /* لون العنصر النشط */
+                color:  $seconderyColor; 
                 font-weight: bold;
             }
             
@@ -99,15 +99,21 @@
                         }
                     }
                 }
-
-                &:hover .dropdown-menu {
-                    display: block;
-                }
+                    &:hover {
+                        .dropdown-menu {
+                            display: block;
+                        }
+                    }
+                
             }
             @include dropdown;
         }
+        .nav-item .nav-link{
+            padding: 3.5px 0;
+            
+        }
     }
-  
+
 
     @media screen and (max-width: 500px) {
         .navbar-toggler {
@@ -164,7 +170,7 @@
     &::before {
         content: "-25%"; 
         position: absolute;
-        top: 10px; 
+        top: 22px; 
         left: 10px; 
         width: 25px; 
         height: 25px; 
@@ -183,7 +189,7 @@
     &::before {
         content: "New"; 
         position: absolute;
-        top: 10px; 
+        top: 22px; 
         left: 10px; 
         width: 25px; 
         height: 25px; 
@@ -203,7 +209,7 @@
         background-color: transparent;
         border: none;
         display: inline-block;
-        padding: 6px 16px;
+        padding: 6px 30px;
         font-size: 16px;
         font-weight: 600;
         opacity: 0.5;
@@ -225,11 +231,14 @@
     .items {
         padding: 0 10px;
         .item {
-            border-right: 1px solid gray;
+            border-right: 1px solid rgba(180, 179, 179, 0.71);
+            border-left: 1px solid rgba(180, 179, 179, 0.71);
             margin-bottom: 2%;
             padding: 0;
+            transition: all .5s ease;
             .item-img {
                 padding: 10px 0;
+             
                 margin-bottom: 3%;
                 display: flex;
                 justify-content: center;
@@ -237,13 +246,26 @@
                 position: relative;
 
                 img {
-                    width: 50%;
+                    width: 100px;
+                    height: 90px;
                     object-fit: cover;
                 }
+                .heart {
+                    @include heart;
+                 }
+                 &:hover {
+                     .heart {
+                         visibility: visible;
+                     }
+                 }
 
+            }
+            .sale{
+                position: relative;
                 @include sale;
             }
             .new {
+                position: relative;
                 @include new;
             }
             .item-info {
@@ -267,7 +289,7 @@
                 span {
                     margin-top: -10px !important;
                     font-size: 0.9rem;
-                    line-height: 0.5; // تعديل line-height هنا لتحقيق تناسق أفضل
+                    line-height: 0.5; 
                     color: #64686b;
                 }
             }
@@ -279,12 +301,13 @@
                 padding: 5px 5px;
                 border-radius: 0 0 7px 7px;
                 cursor: pointer;
+                transition: all .5s ease;
 
                 a {
-                    color: #fff;
+                    color: #fff !important;
                     font-size: 0.9rem;
                     font-weight: 500;
-                    transition: all 0.5s ease;
+                   
 
                     &:hover {
                         color: $seconderyColor;
@@ -301,4 +324,32 @@
             }
         }
     }
+}
+
+@mixin heart {
+    position: absolute;
+                top: 23px;
+                right: 10px;
+                background-color: #d8d9daaf;
+                padding: 5px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #b6b8ba;
+                cursor: pointer;
+                visibility: hidden;
+                .fa-heart {
+                    color: #b6b8ba;
+                }
+                &:hover {
+                    background-color: #eee;
+                    box-shadow:
+                        0 4px 6px rgba(0, 0, 0, 0.2),
+                        0 1px 3px rgba(0, 0, 0, 0.1);
+                    i {
+                        color: red;
+                    }
+                }
+    
 }
